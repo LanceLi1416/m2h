@@ -97,8 +97,7 @@
         autoRefresh: true,
         matchBrackets: true,
         highlightSelectionMatches: {showToken: /\b\w+\b/, annotateScrollbar: true},
-        extraKeys: {"Ctrl-Space": "autocomplete"},
-        keyMap: "vim"
+        extraKeys: {"Ctrl-Space": "autocomplete"}
     });
 
     var htmlEditor = CodeMirror.fromTextArea(document.getElementById("html-output"), {
@@ -123,6 +122,7 @@
 
     htmlEditor.on("change", function () {
         document.getElementById("preview").innerHTML = DOMPurify.sanitize(htmlEditor.getValue());
+        hljs.highlightAll();
     });
 
     updateOutput();
