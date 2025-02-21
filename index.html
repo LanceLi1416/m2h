@@ -97,7 +97,8 @@
         autoRefresh: true,
         matchBrackets: true,
         highlightSelectionMatches: {showToken: /\b\w+\b/, annotateScrollbar: true},
-        extraKeys: {"Ctrl-Space": "autocomplete"}
+        extraKeys: {"Ctrl-Space": "autocomplete"},
+        keyMap: "vim",
     });
 
     var htmlEditor = CodeMirror.fromTextArea(document.getElementById("html-output"), {
