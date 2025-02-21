@@ -44,3 +44,5 @@ htmlEditor.on("change", function () {
 });
 
 updateOutput();
+editor.setOption("theme", "dracula");
+htmlEditor.setOption("theme", "dracula");

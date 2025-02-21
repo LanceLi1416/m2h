@@ -23,6 +23,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/mode/xml/xml.min.js"></script>
 
     <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/vs2015.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/theme/dracula.min.css">
@@ -30,30 +32,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/theme/monokai.min.css">
     <link href="styles.css" rel="stylesheet">
 </head>
-<body>
-<div class="toolbar">
-    <label>
-        <input id="vim-toggle" type="checkbox"> Vim Mode
+<body class="bg-neutral-900 text-gray-200 p-6 h-screen flex flex-col">
+<div class="flex items-center justify-between p-4 bg-neutral-800 rounded-lg shadow-md mb-4">
+    <label class="flex items-center space-x-2">
+        <input class="form-checkbox text-blue-500" id="vim-toggle" type="checkbox"> <span>Vim Mode</span>
     </label>
-    <label>
-        Theme:
-        <select id="theme-selector">
-            <option value="monokai">Monokai</option>
+    <label class="flex items-center space-x-2">
+        <span>Theme:</span>
+        <select class="bg-neutral-700 text-white p-1 rounded" id="theme-selector">
             <option value="dracula">Dracula</option>
             <option value="material-darker">Material Darker</option>
+            <option value="monokai">Monokai</option>
         </select>
     </label>
 </div>
 
-<div class="top-container">
-    <div class="editor-container">
+<div class="flex gap-4 h-1/2">
+    <div class="w-1/2 bg-gray-800 rounded-lg shadow-md">
         <textarea id="markdown"></textarea>
     </div>
-    <div class="html-container">
+    <div class="w-1/2 bg-gray-800 rounded-lg shadow-md">
         <textarea id="html-output"></textarea>
     </div>
 </div>
-<div id="preview" class="preview"></div>
+<div class="mt-4 p-4 bg-neutral-800 rounded-lg shadow-md overflow-auto h-1/2" id="preview"></div>
 
 <script src="script.js"></script>
 </body>
