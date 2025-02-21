@@ -54,6 +54,7 @@ body {
     background: #1e1e1e;
     height: 40vh;
     min-height: 40vh;
+    max-height: 40vh;
     color: #d4d4d4;
     box-sizing: border-box;
 }
