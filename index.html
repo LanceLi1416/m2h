@@ -26,60 +26,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/vs2015.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/theme/material-darker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.0/theme/monokai.min.css">
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding: 20px;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-            background-color: #1e1e1e;
-            color: #d4d4d4;
-            box-sizing: border-box;
-        }
-
-        .top-container {
-            display: flex;
-            gap: 10px;
-            height: 45vh;
-            min-height: 45vh;
-            box-sizing: border-box;
-        }
-
-        .editor-container, .html-container {
-            flex: 1;
-            border: 1px solid #333;
-            border-radius: 8px;
-            overflow: hidden;
-            height: 100%;
-            background-color: #252526;
-            color: #d4d4d4;
-            box-sizing: border-box;
-            display: flex;
-        }
-
-        .CodeMirror {
-            height: 100%;
-            width: 100%;
-        }
-
-        .preview {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #333;
-            border-radius: 8px;
-            overflow: auto;
-            background: #1e1e1e;
-            height: 50vh;
-            min-height: 50vh;
-            color: #d4d4d4;
-            box-sizing: border-box;
-        }
-    </style>
+    <link href="styles.css" rel="stylesheet">
 </head>
 <body>
+<div class="toolbar">
+    <label>
+        <input id="vim-toggle" type="checkbox"> Vim Mode
+    </label>
+    <label>
+        Theme:
+        <select id="theme-selector">
+            <option value="monokai">Monokai</option>
+            <option value="dracula">Dracula</option>
+            <option value="material-darker">Material Darker</option>
+        </select>
+    </label>
+</div>
+
 <div class="top-container">
     <div class="editor-container">
         <textarea id="markdown"></textarea>
@@ -89,44 +54,7 @@
     </div>
 </div>
 <div id="preview" class="preview"></div>
-<script>
-    var editor = CodeMirror.fromTextArea(document.getElementById("markdown"), {
-        mode: "gfm",
-        theme: "monokai",
-        lineNumbers: true,
-        autoRefresh: true,
-        matchBrackets: true,
-        highlightSelectionMatches: {showToken: /\b\w+\b/, annotateScrollbar: true},
-        extraKeys: {"Ctrl-Space": "autocomplete"},
-        keyMap: "vim",
-    });
 
-    var htmlEditor = CodeMirror.fromTextArea(document.getElementById("html-output"), {
-        mode: "htmlmixed",
-        theme: "monokai",
-        lineNumbers: true,
-        autoRefresh: true,
-        matchBrackets: true,
-    });
-
-    editor.on("change", function () {
-        updateOutput();
-    });
-
-    function updateOutput() {
-        let markdown = editor.getValue();
-        let sanitizedHTML = DOMPurify.sanitize(marked.parse(markdown));
-        htmlEditor.setValue(sanitizedHTML);
-        document.getElementById("preview").innerHTML = sanitizedHTML;
-        hljs.highlightAll();
-    }
-
-    htmlEditor.on("change", function () {
-        document.getElementById("preview").innerHTML = DOMPurify.sanitize(htmlEditor.getValue());
-        hljs.highlightAll();
-    });
-
-    updateOutput();
-</script>
+<script src="script.js"></script>
 </body>
 </html>
